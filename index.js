@@ -1,4 +1,5 @@
 const express = require('express');
+const Joi = require('joi');
 const app = express();
 
 // Send an Receive Data in Format Json 
@@ -26,12 +27,24 @@ app.get('/Api/Product/:id', (req, res) => {
 
 // Add New Product 
 app.post('/Api/Product', (req,res) => {
-    const product = {
-        id : req.body.id,
-        ProductName : req.body.ProductName
+    const schema = {
+        productId : Joi.number().integer().required(),
+        productName : Joi.string().min(3).required()
     }
+    const joiError = Joi.validate(req.body, schema);
+    
+    if(joiError.error) {
+        return res.send(joiError.error.details[0].message);
+    }
+
+    const product = {
+        productId: req.body.id,
+        productName : req.body.ProductName
+    }
+
     products.push(product);
     res.send(product);
+    
 })
 
 // Change Port in CMD  => export port=4000 or others 
@@ -41,7 +54,7 @@ app.listen(port, () => console.log(`App working in Port :  http://localhost:/${p
 
 // Data Structures = Type  Array
 const products = [
-    { productId: 1, ProductName: 'PC DEL 2012' },
-    { productId: 2, ProductName: 'Lenovo' },
-    { productId: 3, ProductName: 'Mac' },
+    { productId: 1, productName: 'PC DEL 2012' },
+    { productId: 2, productName: 'Lenovo' },
+    { productId: 3, productName: 'Mac' },
 ];
