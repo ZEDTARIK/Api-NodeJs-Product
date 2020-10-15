@@ -9,4 +9,6 @@ Step-4 : Run Project from file index.js : nodemon index.js
     Package express => Using for Routting 
 --*******************
 
-        
+--*******************
+    Package joi => Using for Validations  ( version 14.3.1)
+--*******************
