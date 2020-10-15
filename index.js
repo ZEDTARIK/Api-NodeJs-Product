@@ -26,11 +26,12 @@ app.get('/Api/Product/:id', (req, res) => {
 });
 
 // Add New Product 
-app.post('/Api/Product', (req,res) => {
+app.post('/Api/Product/', (req,res) => {
     const schema = {
         productId : Joi.number().integer().required(),
         productName : Joi.string().min(3).required()
-    }
+    };
+
     const joiError = Joi.validate(req.body, schema);
     
     if(joiError.error) {
@@ -38,8 +39,8 @@ app.post('/Api/Product', (req,res) => {
     }
 
     const product = {
-        productId: req.body.id,
-        productName : req.body.ProductName
+        productId: req.body.productId,
+        productName : req.body.productName
     }
 
     products.push(product);
