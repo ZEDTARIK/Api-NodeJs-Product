@@ -1,0 +1,17 @@
+{
+  "name": "api-node-product",
+  "version": "1.0.0",
+  "description": "Create Api Product",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Zouhair ETTARAK",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.5"
+  },
+  "dependencies": {
+    "mongoose": "^5.10.9"
+  }
+}
