@@ -31,7 +31,7 @@ app.get('/Api/Product/:id', (req, res) => {
     //res.send(req.params);
     const findProductById = products.find(element => element.productId == req.params.id);
     if (!findProductById) {
-        res.send('This Product not Found ?? ');
+       return res.send('This Product not Found ?? ');
     }
     res.send(findProductById);
 
@@ -57,7 +57,7 @@ app.post('/Api/Product/', (req, res) => {
 app.put('/Api/Product/:productId', (req, res) => {
     const findProductById = products.find(element => element.productId == req.params.productId);
     if (!findProductById) {
-        res.send('This Product not Found ?? ');
+        return   res.send('This Product not Found ?? ');
     }
     const { error } = productValidate(req.body);
 
@@ -69,6 +69,16 @@ app.put('/Api/Product/:productId', (req, res) => {
         res.send(findProductById);
     }
 
+});
+
+app.delete('/Api/Product/:productId', (req, res) => {
+    const findProductById = products.find(element => element.productId == req.params.productId);
+    if (!findProductById) {
+       return  res.send(`This Product N ${ findProductById.productId }  not Found ??`);
+    }
+    const productIndex = products.indexOf(findProductById);
+    products.splice(productIndex, 1);
+    res.send(`Product is Deleted`);
 });
 
 // Create function Validate
