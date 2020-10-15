@@ -1,6 +1,9 @@
 const express = require('express');
 const app = express();
 
+// Send an Receive Data in Format Json 
+app.use(express.json());
+
 // Route Default in Port http://localhost:3000/
 app.get('/', (req, res) => {
     res.send('Hello Zouhair');
@@ -20,6 +23,17 @@ app.get('/Api/Product/:id', (req, res) => {
     res.send(findProductById);
 
 });
+
+// Add New Product 
+app.post('/Api/Product', (req,res) => {
+    const product = {
+        id : req.body.id,
+        ProductName : req.body.ProductName
+    }
+    products.push(product);
+    res.send(product);
+})
+
 // Change Port in CMD  => export port=4000 or others 
 const port = process.env.port || 3000;
 app.listen(port, () => console.log(`App working in Port :  http://localhost:/${port}`));
